@@ -12,11 +12,11 @@ defmodule SQLiDetect.Security.SQLi do
   dev, so I am okay with it.
 
   I only do this because at the time of this writing this is the easiest way I
-  know to pull the model and tokenizer, and then create the serving. After
+  know to pull the model and tokenizer async, and then create the serving. After
   creating the serving, I want to store it for reuse.
 
-  I think of some hypothetical ways to do this, but gives us enough for a prof
-  of concept. I am defiantly open to feedback here.
+  I think of some hypothetical ways to do this better, but gives us enough for a
+  proof of concept. I am defiantly open to feedback here.
 
   Some open questions:
 
