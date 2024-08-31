@@ -6,10 +6,10 @@ defmodule SQLiDetect.Security.SQLi do
 
   This module is _not_ the way to implement this.
 
-  A singleton GenServer to handle event all LiveView event in an application
-  will cause a bottle neck. I am completely aware what I am doing here is really
-  bad. Also there is a subtle race condition in here, but it shouldn't effect
-  local dev, so I am okay with it.
+  A singleton GenServer to handle all LiveView events in an application will
+  cause a bottle neck. I am completely aware what I am doing here is really bad
+  Also there is a subtle race condition in here, but it shouldn't effect local
+  dev, so I am okay with it.
 
   I only do this because at the time of this writing this is the easiest way I
   know to pull the model and tokenizer, and then create the serving. After
