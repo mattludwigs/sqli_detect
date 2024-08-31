@@ -6,20 +6,24 @@ defmodule SQLiDetect.Security.SQLi do
 
   This module is _not_ the way to implement this.
 
-  A singleton GenServer to handle event LiveView event in an application will
-  cause a bottle neck. I am completely aware what I am doing in here is really
-  bad. Also there is subtle race condition in here, but it shouldn't effect
+  A singleton GenServer to handle event all LiveView event in an application
+  will cause a bottle neck. I am completely aware what I am doing here is really
+  bad. Also there is a subtle race condition in here, but it shouldn't effect
   local dev, so I am okay with it.
 
   I only do this because at the time of this writing this is the easiest way I
   know to pull the model and tokenizer, and then create the serving. After
   creating the serving, I want to store it for reuse.
 
-  I think of some hypothetical ways to do this but gives us enough for a prof
+  I think of some hypothetical ways to do this, but gives us enough for a prof
   of concept. I am defiantly open to feedback here.
 
-  Is there away to download the huggingface model and create the serving at
-  compile time? Do we want to do this? Is runtime better?
+  Some open questions:
+
+  - Is there away to download the huggingface model and create the serving at
+  compile time?
+  - Do we want to do this?
+  - Is runtime better?
   """
 
   use GenServer
