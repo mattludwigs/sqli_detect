@@ -13,7 +13,10 @@ defmodule SQLiDetectWeb.OverviewLive do
   def handle_event("save", %{"input" => input}, socket) do
     socket =
       socket
-      |> update(:logs, fn log -> log ++ [input] end)
+      |> update(:logs, fn log ->
+        log_entry = %{log: input, sql?: socket.assigns.sql?}
+        log ++ [log_entry]
+      end)
       |> assign_form()
 
     {:noreply, socket}
@@ -24,7 +27,7 @@ defmodule SQLiDetectWeb.OverviewLive do
     <h1>SQLi Detection for Websocket Payloads</h1>
 
     <.simple_form for={@form} phx-submit="save">
-      <.input field={@form[:input]} label="Email" />
+      <.input field={@form[:input]} />
       <:actions>
         <.button>Submit</.button>
       </:actions>
@@ -32,7 +35,13 @@ defmodule SQLiDetectWeb.OverviewLive do
 
     <ul class="mt-8 spacing-y-4">
       <li :for={log <- @logs}>
-        <%= log %>
+        <%= if log.sql? do %>
+          <span class="text-red-500">
+            <%= log.log %>
+          </span>
+        <% else %>
+          <%= log.log %>
+        <% end %>
       </li>
     </ul>
     """

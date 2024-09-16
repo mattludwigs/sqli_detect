@@ -11,15 +11,11 @@ defmodule SQLiDetectWeb.Hooks.SQLiProtect do
                                                                             params,
                                                                             socket ->
         if params_have_sqli?(params) do
-          socket =
-            Phoenix.LiveView.put_flash(
-              socket,
-              :error,
-              "It appears you have some SQLi in the user input"
-            )
+          socket = Phoenix.Component.assign(socket, :sql?, true)
 
-          {:halt, socket}
+          {:cont, socket}
         else
+          socket = Phoenix.Component.assign(socket, :sql?, false)
           {:cont, socket}
         end
       end)
